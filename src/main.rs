@@ -1,7 +1,7 @@
 use std::thread::sleep;
 use std::time::Duration;
 
-use color_eyre::Report;
+use eyre::Report;
 
 use graphite_client::LocalGraphite;
 
@@ -73,8 +73,6 @@ fn one_run(
 }
 
 fn main() {
-  color_eyre::install().unwrap();
-
   let mut graphite = LocalGraphite::new_localhost().unwrap();
   let host = uname::Info::new().unwrap().nodename.replace('.', "_");
 

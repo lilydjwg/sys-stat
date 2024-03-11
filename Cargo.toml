@@ -5,10 +5,10 @@ authors = ["lilydjwg <lilydjwg@gmail.com>"]
 edition = "2021"
 
 [dependencies]
-color-eyre = "*"
+eyre = "*"
 uname = "*"
 graphite-client = { version = "*", path = "../graphite-client" }
-num_cpus = "1.16.0"
+num_cpus = "*"
 
 [profile.release]
 lto = true

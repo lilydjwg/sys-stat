@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::{BufReader, BufRead};
 
-use color_eyre::Result;
+use eyre::Result;
 
 pub const FIELD_NAMES: &[&str] = &[
   "user", "nice", "system", "idle", "iowait", "irq", "softirq",

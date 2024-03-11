@@ -1,7 +1,7 @@
 use std::fs;
 use std::io::{self, BufRead};
 
-use color_eyre::Result;
+use eyre::Result;
 
 fn get_one_psi(which: &str) -> Result<f32> {
   let f = fs::File::open(format!("/proc/pressure/{which}"))?;
