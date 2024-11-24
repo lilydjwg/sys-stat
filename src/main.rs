@@ -8,6 +8,7 @@ use graphite_client::LocalGraphite;
 mod memory;
 mod psi;
 mod cpu;
+mod load;
 
 fn timestamp() -> u64 {
   use std::time::{SystemTime, UNIX_EPOCH};
@@ -30,6 +31,7 @@ fn one_run(
   let usage = memory::get_memory_usage()?;
   let psi = psi::get_psi_info()?;
   let cpu_info = cpu::get_cpu_time()?;
+  let load = load::get_system_load()?;
   let t = timestamp();
 
   let mut msgs = Vec::new();
@@ -66,6 +68,10 @@ fn one_run(
     state.last_cpu_info = cpu_info;
     state.last_cpu_total = total;
   }
+
+  msgs.push(format!("stats.{host}.load.shortterm {} {t}", load.shortterm));
+  msgs.push(format!("stats.{host}.load.midterm {} {t}", load.midterm));
+  msgs.push(format!("stats.{host}.load.longterm {} {t}", load.longterm));
 
   graphite.send_stats(&msgs);
 
