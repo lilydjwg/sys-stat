@@ -36,7 +36,12 @@ fn one_run(
 
   let mut msgs = Vec::new();
 
-  msgs.push(format!("stats.{host}.mem_avail {} {t}", usage.mem_avail));
+  msgs.push(format!("stats.{host}.memory.used {} {t}", usage.used));
+  msgs.push(format!("stats.{host}.memory.avail {} {t}", usage.avail));
+  msgs.push(format!("stats.{host}.memory.cached {} {t}", usage.cached));
+  msgs.push(format!("stats.{host}.memory.buffered {} {t}", usage.buffered));
+  msgs.push(format!("stats.{host}.memory.slab_recl {} {t}", usage.slab_recl));
+  msgs.push(format!("stats.{host}.memory.slab_unrecl {} {t}", usage.slab_unrecl));
   if let Some(swap) = usage.swap_free {
     msgs.push(format!("stats.{host}.swap_free {swap} {t}"));
   }
